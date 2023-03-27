@@ -46,7 +46,16 @@ def read_root(texto: str = Form(...)):
         resultado_lista.append({"url": element, "resultado": "", "WRONG_PAGE": "", "IMAGE_HIGH_RESOLUTION": "",
              "INNER_PAGES_NOT_TRANSLATED": "False", "JAVASCRIPT_DROPDOWN": ""})
         '''PATH_TO_DRIVER = '/usr/bin/chromedriver'''''
-        driver= webdriver.Chrome(os.environ.get({PATH_TO_DRIVER}))
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+
+        prefs = {"profile.managed_default_content_settings.images": 2}
+        chrome_options.headless = True
+
+        chrome_options.add_experimental_option("prefs", prefs)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
         driver.get(element)
 
         time.sleep(1)
