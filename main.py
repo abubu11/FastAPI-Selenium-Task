@@ -62,6 +62,7 @@ def read_root(texto: str = Form(...)):
 
 
         try:
+
             wrong_page=driver.find_element(By.XPATH,'/html/body/div[1]/header/div[1]/nav/div[1]/button[2]')
             wrong_page.click()
             time.sleep(2)
@@ -79,25 +80,35 @@ def read_root(texto: str = Form(...)):
                                                               '/html/body/div[1]/header/div[1]/nav/div[1]/nav/div[1]/section[1]/ul/li[2]/a/span[1]')
                 javascript_list_enabled.click()
 
-                resultado_lista[i] = {"url": element, "resultado": "NOT_PASS", "IMAGE_BAD_RESOLUTION": "",
-                                      "INNER_PAGES_NOT_TRANSLATED": "", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "True"}
-                pass
-
-            except:
                 resultado_lista[i] = {"url": element, "resultado": "", "IMAGE_BAD_RESOLUTION": "",
                                       "INNER_PAGES_NOT_TRANSLATED": "", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "False"}
                 pass
 
+            except:
+                resultado_lista[i] = {"url": element, "resultado": "NOT_PASS", "IMAGE_BAD_RESOLUTION": "",
+                                      "INNER_PAGES_NOT_TRANSLATED": "", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "True"}
+                pass
+
             driver.get(element)
 
-            inner_page=driver.find_element(By.XPATH,'/html/body/div[1]/main/section[1]/div[2]/ul/li[2]/a/span')
+            inner_page=driver.find_element(By.XPATH,'/html/body/div[1]/main/section[1]/div[2]/ul/li[7]/a/span')
             inner_page.click()
 
 
             time.sleep(1)
 
-            html_element=driver.find_element(By.TAG_NAME,'html')
-            lang_attribute = html_element.get_attribute('translate')
+            translated_text=driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[2]/div/div[2]/div[1]/div/span')
+            print(translated_text.text)
+
+            if translated_text.text=="निशुल्क ऑनालइन":
+                resultado_lista[i] = {"url": element, "resultado": "", "IMAGE_BAD_RESOLUTION": "",
+                                      "INNER_PAGES_NOT_TRANSLATED": "False", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "False"}
+
+            else:
+                resultado_lista[i] = {"url": element, "resultado": "NOT_PASS", "IMAGE_BAD_RESOLUTION": "",
+                                      "INNER_PAGES_NOT_TRANSLATED": "True", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "False"}
+
+
 
 
 
