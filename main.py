@@ -26,7 +26,6 @@ class Msg(BaseModel):
     secret: str
 
 
-expected_language="hi"
 resultado_lista=[]
 
 @app.post('/')
@@ -58,13 +57,14 @@ def read_root(texto: str = Form(...)):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
         driver.get(element)
 
-        time.sleep(1)
+        time.sleep(2)
 
 
 
         try:
             wrong_page=driver.find_element(By.XPATH,'/html/body/div[1]/header/div[1]/nav/div[1]/button[2]')
             wrong_page.click()
+            time.sleep(2)
             resultado_lista[i]={"url": element, "resultado": "", "WRONG_PAGE": "False", "IMAGE_BAD_RESOLUTION": "",
              "INNER_PAGES_NOT_TRANSLATED": "", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": ""}
 
@@ -74,9 +74,11 @@ def read_root(texto: str = Form(...)):
             try:
                 javascript_list = driver.find_element(By.XPATH, '/html/body/div[1]/header/div[1]/nav/div[1]/button[2]')
                 javascript_list.click()
+                time.sleep(2)
                 javascript_list_enabled = driver.find_element(By.XPATH,
                                                               '/html/body/div[1]/header/div[1]/nav/div[1]/nav/div[1]/section[1]/ul/li[2]/a/span[1]')
                 javascript_list_enabled.click()
+
                 resultado_lista[i] = {"url": element, "resultado": "NOT_PASS", "IMAGE_BAD_RESOLUTION": "",
                                       "INNER_PAGES_NOT_TRANSLATED": "", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "True"}
                 pass
@@ -91,6 +93,7 @@ def read_root(texto: str = Form(...)):
             inner_page=driver.find_element(By.XPATH,'/html/body/div[1]/main/section[1]/div[2]/ul/li[2]/a/span')
             inner_page.click()
 
+
             time.sleep(1)
 
             html_element=driver.find_element(By.TAG_NAME,'html')
@@ -100,9 +103,6 @@ def read_root(texto: str = Form(...)):
 
             driver.quit()
 
-            if lang_attribute == expected_language:
-                {"url": element, "resultado": "", "WRONG_PAGE": "", "IMAGE_HIGH_RESOLUTION": "",
-                 "INNER_PAGES_NOT_TRANSLATED": "False", "JAVASCRIPT_DROPDOWN": ""}
 
 
             pass
