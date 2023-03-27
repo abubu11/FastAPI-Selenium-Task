@@ -29,9 +29,9 @@ class Msg(BaseModel):
 resultado_lista=[]
 
 @app.post('/')
-def read_root(texto: str = Form(...)):
+def read_root(text: str = Form(...)):
 
-    urls = texto
+    urls = text
 
     print(urls)
 
