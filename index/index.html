@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar texto a FastAPI</title>
+</head>
+<body>
+    <h1>Introduce el texto</h1>
+    <form action="http://localhost:8000/procesar_texto" method="POST">
+        <textarea name="texto" rows="4" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

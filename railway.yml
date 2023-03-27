@@ -1,0 +1,6 @@
+services:
+  main:
+    buildCommand: docker build -t myapp .
+    runCommand: python app.py
+    environment:
+      - CHROMEDRIVER_PATH=/usr/bin/chromedriver
