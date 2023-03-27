@@ -45,7 +45,7 @@ def read_root(texto: str = Form(...)):
         i+=1
         resultado_lista.append({"url": element, "resultado": "", "WRONG_PAGE": "", "IMAGE_HIGH_RESOLUTION": "",
              "INNER_PAGES_NOT_TRANSLATED": "False", "JAVASCRIPT_DROPDOWN": ""})
-        PATH_TO_DRIVER = os.environ.get("CHROMEDRIVER_PATH")
+        PATH_TO_DRIVER = './chromedriver'
         driver= webdriver.Chrome(PATH_TO_DRIVER)
         driver.get(element)
 
