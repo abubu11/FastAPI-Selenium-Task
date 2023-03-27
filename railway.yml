@@ -1,6 +1,6 @@
 services:
   main:
-    buildCommand: docker build -t myapp .
-    runCommand: python app.py
+    buildCommand: docker build -t FastAPI-Selenium-Task .
+    runCommand: python main.py
     environment:
       - CHROMEDRIVER_PATH=/usr/bin/chromedriver
