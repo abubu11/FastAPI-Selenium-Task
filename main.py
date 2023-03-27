@@ -89,29 +89,6 @@ def read_root(texto: str = Form(...)):
                                       "INNER_PAGES_NOT_TRANSLATED": "", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "True"}
                 pass
 
-            driver.get(element)
-
-            inner_page=driver.find_element(By.XPATH,'/html/body/div[1]/main/section[1]/div[2]/ul/li[7]/a/span')
-            inner_page.click()
-
-
-            time.sleep(1)
-
-            translated_text=driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[2]/div/div[2]/div[1]/div/span')
-            print(translated_text.text)
-
-            if translated_text.text=="निशुल्क ऑनालइन":
-                resultado_lista[i] = {"url": element, "resultado": "", "IMAGE_BAD_RESOLUTION": "",
-                                      "INNER_PAGES_NOT_TRANSLATED": "False", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "False"}
-
-            else:
-                resultado_lista[i] = {"url": element, "resultado": "NOT_PASS", "IMAGE_BAD_RESOLUTION": "",
-                                      "INNER_PAGES_NOT_TRANSLATED": "True", "JAVASCRIPT_DROPDOWN_NOT_ENABLED": "False"}
-
-
-
-
-
             driver.quit()
 
 
